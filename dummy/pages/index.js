@@ -32,6 +32,14 @@ function HomePage() {
     })
   }
 
+  function getsingleFeedbackData(id){
+    fetch(`/api/${id}`).then((res)=>res.json())
+    .then((data)=>{
+      // setFeedback(data.feedback)
+      console.log(data)
+    })
+  }
+
   return (
     <>
      <h1>HomePage</h1>
@@ -55,7 +63,7 @@ function HomePage() {
 
      <ul>
       {feedback.length>0 && feedback.map((feed)=>(
-        <li key={feed.id}>{feed.text}</li>
+        <li key={feed.id}><button onClick={getsingleFeedbackData(feed.id)}>{feed.text}</button></li>
       ))}
      </ul>
     </>
