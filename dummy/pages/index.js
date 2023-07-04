@@ -1,7 +1,8 @@
-import { useRef } from "react"
+import { useRef, useState } from "react"
 
 function HomePage() {
 
+  const [feedback,setFeedback] = useState([]);
 
   const feedbackRef = useRef()
   const emailRef = useRef()
@@ -9,12 +10,8 @@ function HomePage() {
 
   function submitHandler(e){
     e.preventDefault();
-
-
     const mail = emailRef.current.value;
     const feed = feedbackRef.current.value;
-
-    // console.log(feed,mail)
     const reqBody = {email:mail,text:feed}
 
     fetch('/api/feedback',{
@@ -25,6 +22,14 @@ function HomePage() {
       }
     }).then((res)=>res.json())
     .then((data)=>console.log(data))
+  }
+
+  function getFeedbackData(){
+    fetch('/api/feedback').then((res)=>res.json())
+    .then((data)=>{
+      setFeedback(data.feedback)
+      console.log(data.feedback)
+    })
   }
 
   return (
@@ -43,6 +48,16 @@ function HomePage() {
      <br />
      <button>Submit</button>
      </form>
+
+     <hr />
+
+     <button onClick={getFeedbackData}>Get Feedback</button>
+
+     <ul>
+      {feedback.length>0 && feedback.map((feed)=>(
+        <li key={feed.id}>{feed.text}</li>
+      ))}
+     </ul>
     </>
   )
 }
