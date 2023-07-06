@@ -25,7 +25,35 @@ export default async function handler(req, res) {
       to : `${email}`,
       subject: 'Hello from Nodemailer',
       text: `Email: ${email}\nMessage: ${message}`,
-      html : '<p>Please click on the following link to verify your email address:</p>'
+      html : `<!DOCTYPE html>
+      <html lang="en">
+      <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+        <title>Email Template</title>
+      </head>
+      <body>
+        <div class="container">
+          <div class="row">
+            <div class="col">
+              <h1>Contact Form Submission</h1>
+              <p>Dear Admin,</p>
+              <p>You have received a new contact form submission. Here are the details:</p>
+              <ul>
+                <li><strong>Email:</strong> ${email}</li>
+                <li><strong>Message:</strong> ${message}</li>
+              </ul>
+              <p>Thank you for your attention.</p>
+              <hr>
+              <p>Best regards,</p>
+              <p>The Contact Form</p>
+            </div>
+          </div>
+        </div>
+      </body>
+      </html>`
     };
 
     try {
