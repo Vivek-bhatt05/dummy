@@ -6,19 +6,26 @@ export default async function handler(req, res) {
     console.log(email,message)
   
     const transporter = nodemailer.createTransport({
-      service: 'gmail',
+    //   service: 'gmail',
+    //   auth: {
+    //     user: 'vivek.bhatt529@gmail.com',
+    //     pass: 'vrvojprmusmvwdal',
+    //   },
+    host: 'smtp-relay.brevo.com',
+      port: 587,
       auth: {
-        user: 'vivek.bhatt529@gmail.com',
-        pass: 'vrvojprmusmvwdal',
+        user: 'vk.bizhues@gmail.com',
+        pass: 'BwOX5pm427hFcSPz',
       },
     });
 
  // Define the email content
     const mailOptions = {
-      from: `${email}`,
-      to: 'vivek.bhatt529@gmail.com',
+      from : 'vk.bizhues@gmail.com',
+      to : `${email}`,
       subject: 'Hello from Nodemailer',
       text: `Email: ${email}\nMessage: ${message}`,
+      html : '<p>Please click on the following link to verify your email address:</p>'
     };
 
     try {
